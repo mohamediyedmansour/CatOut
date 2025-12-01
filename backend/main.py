@@ -1,6 +1,7 @@
 import os
 
 os.environ.setdefault("NUMBA_DISABLE_JIT", "1")
+os.environ.setdefault("XDG_CACHE_HOME", os.path.join(os.path.dirname(__file__), ".u2net_cache"))
 
 import fastapi
 import rembg
