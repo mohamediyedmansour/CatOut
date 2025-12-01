@@ -1,3 +1,7 @@
+import os
+
+os.environ.setdefault("NUMBA_DISABLE_JIT", "1")
+
 import fastapi
 import rembg
 from fastapi.responses import JSONResponse
