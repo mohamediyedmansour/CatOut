@@ -31,6 +31,14 @@ async def remove_background(file: fastapi.UploadFile):
             content={"error": "internal_server_error", "detail": str(exc)},
         )
 
+#Wizardry so render.com doesnt nuke our app
+@app.get("/getTime")
+async def get_time():
+    import datetime
+    now = datetime.datetime.utcnow()
+    return {"time": now.isoformat() + "Z"}
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
