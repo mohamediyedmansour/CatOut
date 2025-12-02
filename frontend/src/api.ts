@@ -4,8 +4,8 @@ export async function uploadImage(
   file: File,
   onProgress?: ProgressCallback
 ): Promise<Blob> {
-  const url = "https://catout-api.iyed.space/remove-background";
-
+  //const url = "https://catout-api.iyed.space/remove-background";
+  const url = "http://localhost:8000/remove-background";
   return new Promise<Blob>((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);

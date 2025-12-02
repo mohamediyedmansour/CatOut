@@ -1,7 +1,18 @@
 import os
 
 os.environ.setdefault("NUMBA_DISABLE_JIT", "1")
-os.environ.setdefault("XDG_CACHE_HOME", os.path.join(os.path.dirname(__file__), ".u2net_cache"))
+# Ensure pooch/rembg use a writable cache directory even if HOME is unset
+cache_dir = os.path.join(os.path.dirname(__file__), ".u2net")
+os.environ.setdefault("XDG_CACHE_HOME", cache_dir)
+os.environ.setdefault("HOME", cache_dir)
+os.environ.setdefault("U2NET_HOME", cache_dir)
+# Create cache directory early so pooch/rembg can write into it at runtime
+try:
+    os.makedirs(cache_dir, exist_ok=True)
+except Exception:
+    # If creation fails, rembg/pooch may still attempt to use fallback dirs and
+    # produce useful error messages; log will show permission errors.
+    pass
 
 import fastapi
 import rembg
